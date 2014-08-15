@@ -92,6 +92,7 @@
 		) {
 			smvp = SenkyoMVP(json, false);
 			smvp.addDmgY($ydamage_1, $ydamage_2, $ydamage_k);
+
 		} else if (
 			$battle_midnight_sp ||
 			$combined_midnight_sp
