@@ -41,7 +41,7 @@ var SenkyoMVP = function (json, d_rate) {
 	];
 
 	var SEIKU = [
-		'',
+		'拮抗',
 		'確保',
 		'優勢',
 		'劣勢',
