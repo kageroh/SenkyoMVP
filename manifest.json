@@ -1,0 +1,8 @@
+{
+	"manifest_version": 2,
+	"name": "KanColle SenkyoMVP",
+	"version": "0.0.1",
+	"description": "艦これの戦況を見て砲雷MVPを表示する",
+	"devtools_page": "devtools.html"
+}
+
