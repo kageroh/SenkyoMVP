@@ -4,9 +4,6 @@ var SenkyoMVP = function (json, d_rate) {
 	var _f2_ = 2;
 	var _e2_ = 3;
 
-	var _r_op_ = 0;
-	var _r_ed_ = 1;
-
 	var JINKEI = [
 		'',
 		'単縦',
@@ -199,13 +196,7 @@ var SenkyoMVP = function (json, d_rate) {
 		}
 	}
 
-	function calcDamageHougeki(num, damage_fn, ydamage_n) {
-		var h =
-			(num === 1) ? hougeki1 :
-			(num === 2) ? hougeki2 :
-			(num === 3) ? hougeki3 :
-			(num === 8) ? hougeki8 :
-			null;
+	function calcDamageHougeki(h, damage_fn, ydamage_n) {
 		if (!h) return;
 
 		var dmg_list = h.api_damage.slice(1);
@@ -227,11 +218,7 @@ var SenkyoMVP = function (json, d_rate) {
 		}
 	}
 
-	function calcDamageRaigeki(oe, damage_fn, ydamage_n) {
-		var r =
-			(oe === _r_op_) ? op_attack :
-			(oe === _r_ed_) ? raigeki   :
-			null;
+	function calcDamageRaigeki(r, damage_fn, ydamage_n) {
 		if (!r) return;
 
 		var fs = r.api_fdam.slice(1);
@@ -251,24 +238,24 @@ var SenkyoMVP = function (json, d_rate) {
 		}
 	}
 
-	calcDamageKoukuu(kouku1);
+	calcDamageKoukuu (kouku1);
 	calcDamageKoukuuC(kouku1);
-	calcDamageKoukuu(kouku2);
+	calcDamageKoukuu (kouku2);
 	calcDamageKoukuuC(kouku2);
 	calcDamageShien();
 	if (combined) {
-		calcDamageHougeki(1, damage_f2, ydamage_2);
-		calcDamageHougeki(2, damage_f1, ydamage_1);
-		calcDamageHougeki(3, damage_f1, ydamage_1);
-		calcDamageHougeki(8, damage_f2, ydamage_2);
-		calcDamageRaigeki(_r_op_, damage_f2, ydamage_2);
-		calcDamageRaigeki(_r_ed_, damage_f2, ydamage_2);
+		calcDamageHougeki(hougeki1,  damage_f2, ydamage_2);
+		calcDamageHougeki(hougeki2,  damage_f1, ydamage_1);
+		calcDamageHougeki(hougeki3,  damage_f1, ydamage_1);
+		calcDamageHougeki(hougeki8,  damage_f2, ydamage_2);
+		calcDamageRaigeki(op_attack, damage_f2, ydamage_2);
+		calcDamageRaigeki(raigeki,   damage_f2, ydamage_2);
 	} else {
-		calcDamageHougeki(1, damage_f1, ydamage_1);
-		calcDamageHougeki(2, damage_f1, ydamage_1);
-		calcDamageHougeki(8, damage_f1, ydamage_1);
-		calcDamageRaigeki(_r_op_, damage_f1, ydamage_1);
-		calcDamageRaigeki(_r_ed_, damage_f1, ydamage_1);
+		calcDamageHougeki(hougeki1,  damage_f1, ydamage_1);
+		calcDamageHougeki(hougeki2,  damage_f1, ydamage_1);
+		calcDamageHougeki(hougeki8,  damage_f1, ydamage_1);
+		calcDamageRaigeki(op_attack, damage_f1, ydamage_1);
+		calcDamageRaigeki(raigeki,   damage_f1, ydamage_1);
 	}
 
 	var damage_rate_f = 0;
