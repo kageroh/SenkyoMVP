@@ -330,7 +330,10 @@ var SenkyoMVP = function (json, d_rate) {
 		},
 
 		getSeiku: function () {
-			var stage1 = kouku1.api_stage1;
+			var stage1 =
+				(kouku1) ? kouku1.api_stage1 :
+				(kouku2) ? kouku2.api_stage1 :
+				null;
 			if (!stage1) return '';
 
 			var seiku = stage1.api_disp_seiku;
