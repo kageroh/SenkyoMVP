@@ -5,6 +5,9 @@
 	var $ydamage_2 = [];
 	var $ydamage_k = 0;
 
+	var $damage_rate_f = 0;
+	var $damage_rate_e = 0;
+
 	window.addEventListener('load', function () {
 		$display = SenkyoMVP_Display(document);
 		/*
@@ -87,25 +90,29 @@
 			$combined_battle_water ||
 			$combined_air
 		) {
-			smvp = SenkyoMVP(json, true, $combined_battle_water);
+			smvp = SenkyoMVP(json, $combined_battle_water);
 			var d = smvp.getDmgY();
 			$ydamage_1 = d[0];
 			$ydamage_2 = d[1];
 			$ydamage_k = d[2];
+			var r = smvp.getRate();
+			$damage_rate_f = r[0];
+			$damage_rate_e = r[1];
 
 		} else if (
 			$battle_midnight ||
 			$practice_midnight ||
 			$combined_midnight
 		) {
-			smvp = SenkyoMVP(json, false);
+			smvp = SenkyoMVP(json);
 			smvp.addDmgY($ydamage_1, $ydamage_2, $ydamage_k);
+			smvp.addRate($damage_rate_f, $damage_rate_e);
 
 		} else if (
 			$battle_midnight_sp ||
 			$combined_midnight_sp
 		) {
-			smvp = SenkyoMVP(json, false);
+			smvp = SenkyoMVP(json);
 		}
 
 		$display.set(smvp);

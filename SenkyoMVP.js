@@ -1,4 +1,4 @@
-var SenkyoMVP = function (json, d_rate, water) {
+var SenkyoMVP = function (json, water) {
 	var _f1_ = 0;
 	var _e1_ = 1;
 	var _f2_ = 2;
@@ -266,7 +266,6 @@ var SenkyoMVP = function (json, d_rate, water) {
 
 	var damage_rate_f = 0;
 	var damage_rate_e = 0;
-	var fe_ratio = 0;
 
 	function calcSongai(fe) {
 		var ns = getNowHPs(fe);
@@ -288,14 +287,8 @@ var SenkyoMVP = function (json, d_rate, water) {
 		return (n_sum === 0) ? 0 : d_sum / n_sum;
 	}
 
-	if (d_rate) {
-		damage_rate_f = calcSongai(_f1_) + calcSongai(_f2_);
-		damage_rate_e = calcSongai(_e1_) + calcSongai(_e2_);
-		fe_ratio =
-			(damage_rate_e === 0) ? 'lose' :
-			(damage_rate_f === 0) ? 'win'  :
-			damage_rate_e / damage_rate_f;
-	}
+	damage_rate_f = calcSongai(_f1_) + calcSongai(_f2_);
+	damage_rate_e = calcSongai(_e1_) + calcSongai(_e2_);
 
 	return {
 		F1: _f1_,
@@ -430,18 +423,32 @@ var SenkyoMVP = function (json, d_rate, water) {
 			ydamage_k += dk;
 		},
 
+		getRate: function () {
+			return [
+				damage_rate_f,
+				damage_rate_e
+			];
+		},
+
+		addRate: function (rf, re) {
+			damage_rate_f += rf;
+			damage_rate_e += re;
+		},
+
 		getSongaiF: function () {
-			if (!d_rate) return '';
 			return (Math.round(damage_rate_f * 100 * 10) / 10) + '%';
 		},
 
 		getSongaiE: function () {
-			if (!d_rate) return '';
 			return (Math.round(damage_rate_e * 100 * 10) / 10) + '%';
 		},
 
 		getBairitsu: function () {
-			if (!d_rate) return '';
+			var fe_ratio =
+				(damage_rate_e === 0) ? 'lose' :
+				(damage_rate_f === 0) ? 'win'  :
+				damage_rate_e / damage_rate_f;
+
 			return (typeof fe_ratio === 'string') ? fe_ratio :
 				Math.floor(fe_ratio * 10) / 10;
 		},
