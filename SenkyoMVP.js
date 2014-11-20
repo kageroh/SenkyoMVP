@@ -443,7 +443,11 @@ var SenkyoMVP = function (json, type, start_hps) {
 			];
 		},
 
-		addDmgY: function (d1, d2, dk) {
+		addDmgY: function (d) {
+			var d1 = d[0];
+			var d2 = d[1];
+			var dk = d[2];
+
 			for (var i = 0, len = d1.length; i < len; i++) {
 				var d = d1[i];
 				if (d === -1) break;
@@ -466,7 +470,10 @@ var SenkyoMVP = function (json, type, start_hps) {
 			];
 		},
 
-		addRate: function (rf, re) {
+		addRate: function (r) {
+			var rf = r[0];
+			var re = r[1];
+
 			damage_rate_f += rf;
 			damage_rate_e += re;
 		},
