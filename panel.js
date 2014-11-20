@@ -82,6 +82,10 @@
 		if (result_code !== 1) return;
 
 		var smvp;
+		var type =
+			($combined_battle)       ? 1 :
+			($combined_battle_water) ? 2 :
+			0;
 
 		if (
 			$battle ||
@@ -90,7 +94,7 @@
 			$combined_battle_water ||
 			$combined_air
 		) {
-			smvp = SenkyoMVP(json, $combined_battle_water ? smvp.W : smvp.A);
+			smvp = SenkyoMVP(json, type);
 			var d = smvp.getDmgY();
 			$ydamage_1 = d[0];
 			$ydamage_2 = d[1];
@@ -104,7 +108,7 @@
 			$practice_midnight ||
 			$combined_midnight
 		) {
-			smvp = SenkyoMVP(json);
+			smvp = SenkyoMVP(json, type);
 			smvp.addDmgY($ydamage_1, $ydamage_2, $ydamage_k);
 			smvp.addRate($damage_rate_f, $damage_rate_e);
 
@@ -112,7 +116,7 @@
 			$battle_midnight_sp ||
 			$combined_midnight_sp
 		) {
-			smvp = SenkyoMVP(json);
+			smvp = SenkyoMVP(json, type);
 		}
 
 		$display.set(smvp);

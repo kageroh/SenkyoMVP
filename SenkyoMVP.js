@@ -4,6 +4,7 @@ var SenkyoMVP = function (json, type) {
 	var _f2_ = 2;
 	var _e2_ = 3;
 
+	var _n_ = 0;
 	var _a_ = 1;
 	var _w_ = 2;
 
@@ -71,7 +72,6 @@ var SenkyoMVP = function (json, type) {
 	var maxhps      = data.api_maxhps || [];
 	var nowhps_cb   = data.api_nowhps_combined || [];
 	var maxhps_cb   = data.api_maxhps_combined || [];
-	var combined    = maxhps_cb.length > 0;
 
 	var nowhps_f1   = nowhps.slice(1,7);
 	var maxhps_f1   = maxhps.slice(1,7);
@@ -246,28 +246,30 @@ var SenkyoMVP = function (json, type) {
 	calcDamageKoukuu (kouku2);
 	calcDamageKoukuuC(kouku2);
 	calcDamageShien();
-	if (combined) {
-		switch (type) {
-		case _a_:
-			calcDamageHougeki(hougeki1, damage_f2, ydamage_2);
-			calcDamageHougeki(hougeki2, damage_f1, ydamage_1);
-			calcDamageHougeki(hougeki3, damage_f1, ydamage_1);
-			break;
-		case _w_:
-			calcDamageHougeki(hougeki1, damage_f1, ydamage_1);
-			calcDamageHougeki(hougeki2, damage_f1, ydamage_1);
-			calcDamageHougeki(hougeki3, damage_f2, ydamage_2);
-			break;
-		}
-		calcDamageHougeki(hougeki8,  damage_f2, ydamage_2);
-		calcDamageRaigeki(op_attack, damage_f2, ydamage_2);
-		calcDamageRaigeki(raigeki,   damage_f2, ydamage_2);
-	} else {
+	switch (type) {
+	case _n_:
 		calcDamageHougeki(hougeki1,  damage_f1, ydamage_1);
 		calcDamageHougeki(hougeki2,  damage_f1, ydamage_1);
 		calcDamageHougeki(hougeki8,  damage_f1, ydamage_1);
 		calcDamageRaigeki(op_attack, damage_f1, ydamage_1);
 		calcDamageRaigeki(raigeki,   damage_f1, ydamage_1);
+		break;
+	case _a_:
+		calcDamageHougeki(hougeki1,  damage_f2, ydamage_2);
+		calcDamageHougeki(hougeki2,  damage_f1, ydamage_1);
+		calcDamageHougeki(hougeki3,  damage_f1, ydamage_1);
+		calcDamageHougeki(hougeki8,  damage_f2, ydamage_2);
+		calcDamageRaigeki(op_attack, damage_f2, ydamage_2);
+		calcDamageRaigeki(raigeki,   damage_f2, ydamage_2);
+		break;
+	case _w_:
+		calcDamageHougeki(hougeki1,  damage_f1, ydamage_1);
+		calcDamageHougeki(hougeki2,  damage_f1, ydamage_1);
+		calcDamageHougeki(hougeki3,  damage_f2, ydamage_2);
+		calcDamageHougeki(hougeki8,  damage_f2, ydamage_2);
+		calcDamageRaigeki(op_attack, damage_f2, ydamage_2);
+		calcDamageRaigeki(raigeki,   damage_f2, ydamage_2);
+		break;
 	}
 
 	var damage_rate_f = 0;
@@ -301,9 +303,6 @@ var SenkyoMVP = function (json, type) {
 		E1: _e1_,
 		F2: _f2_,
 		E2: _e2_,
-
-		A: _a_,
-		W: _w_,
 
 		getJinkei: function (fe) {
 			if (!formation) return '';
