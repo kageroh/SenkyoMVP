@@ -90,7 +90,7 @@
 			$combined_battle_water ||
 			$combined_air
 		) {
-			smvp = SenkyoMVP(json, $combined_battle_water);
+			smvp = SenkyoMVP(json, $combined_battle_water ? smvp.W : smvp.A);
 			var d = smvp.getDmgY();
 			$ydamage_1 = d[0];
 			$ydamage_2 = d[1];

@@ -1,8 +1,11 @@
-var SenkyoMVP = function (json, water) {
+var SenkyoMVP = function (json, type) {
 	var _f1_ = 0;
 	var _e1_ = 1;
 	var _f2_ = 2;
 	var _e2_ = 3;
+
+	var _a_ = 1;
+	var _w_ = 2;
 
 	var JINKEI = [
 		'',
@@ -244,14 +247,17 @@ var SenkyoMVP = function (json, water) {
 	calcDamageKoukuuC(kouku2);
 	calcDamageShien();
 	if (combined) {
-		if (water) {
-			calcDamageHougeki(hougeki1, damage_f1, ydamage_1);
-			calcDamageHougeki(hougeki2, damage_f1, ydamage_1);
-			calcDamageHougeki(hougeki3, damage_f2, ydamage_2);
-		} else {
+		switch (type) {
+		case _a_:
 			calcDamageHougeki(hougeki1, damage_f2, ydamage_2);
 			calcDamageHougeki(hougeki2, damage_f1, ydamage_1);
 			calcDamageHougeki(hougeki3, damage_f1, ydamage_1);
+			break;
+		case _w_:
+			calcDamageHougeki(hougeki1, damage_f1, ydamage_1);
+			calcDamageHougeki(hougeki2, damage_f1, ydamage_1);
+			calcDamageHougeki(hougeki3, damage_f2, ydamage_2);
+			break;
 		}
 		calcDamageHougeki(hougeki8,  damage_f2, ydamage_2);
 		calcDamageRaigeki(op_attack, damage_f2, ydamage_2);
@@ -295,6 +301,9 @@ var SenkyoMVP = function (json, water) {
 		E1: _e1_,
 		F2: _f2_,
 		E2: _e2_,
+
+		A: _a_,
+		W: _w_,
 
 		getJinkei: function (fe) {
 			if (!formation) return '';
