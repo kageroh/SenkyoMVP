@@ -1,4 +1,4 @@
-var SenkyoMVP = function (json, type) {
+var SenkyoMVP = function (json, type, start_hps) {
 	var _f1_ = 0;
 	var _e1_ = 1;
 	var _f2_ = 2;
@@ -91,6 +91,16 @@ var SenkyoMVP = function (json, type) {
 	var ydamage_1   = [0,0,0,0,0,0];
 	var ydamage_2   = [0,0,0,0,0,0];
 	var ydamage_k   = 0;
+
+	function getStartHPs(fe) {
+		if (!start_hps) return [];
+		switch (fe) {
+			case _f1_: return start_hps[0];
+			case _e1_: return start_hps[1];
+			case _f2_: return start_hps[2];
+			case _e2_: return start_hps[3];
+		}
+	}
 
 	function getNowHPs(fe) {
 		switch (fe) {
@@ -292,6 +302,15 @@ var SenkyoMVP = function (json, type) {
 			d_sum += d;
 		}
 
+		var s_sum = 0;
+		var ss = getStartHPs(fe);
+		for (var i = 0, len = ss.length; i < len; i++) {
+			var s = ss[i];
+			if (s === -1) break;
+			s_sum += s;
+		}
+		if (s_sum > 0) n_sum = s_sum;
+
 		return (n_sum === 0) ? 0 : d_sum / n_sum;
 	}
 
@@ -405,6 +424,15 @@ var SenkyoMVP = function (json, type) {
 			var ds = getYodame(fe);
 			var d = ds[i];
 			return d;
+		},
+
+		getStartHPs: function () {
+			return  [
+				nowhps_f1,
+				nowhps_e1,
+				nowhps_f2,
+				nowhps_e2
+			];
 		},
 
 		getDmgY: function () {

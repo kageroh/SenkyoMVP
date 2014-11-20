@@ -1,6 +1,8 @@
 (function () {
 	var $display;
 
+	var $start_hps = [];
+
 	var $ydamage_1 = [];
 	var $ydamage_2 = [];
 	var $ydamage_k = 0;
@@ -95,6 +97,7 @@
 			$combined_air
 		) {
 			smvp = SenkyoMVP(json, type);
+			$start_hps = smvp.getStartHPs();
 			var d = smvp.getDmgY();
 			$ydamage_1 = d[0];
 			$ydamage_2 = d[1];
@@ -108,7 +111,7 @@
 			$practice_midnight ||
 			$combined_midnight
 		) {
-			smvp = SenkyoMVP(json, type);
+			smvp = SenkyoMVP(json, type, $start_hps);
 			smvp.addDmgY($ydamage_1, $ydamage_2, $ydamage_k);
 			smvp.addRate($damage_rate_f, $damage_rate_e);
 
