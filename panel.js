@@ -82,6 +82,7 @@
 		var type =
 			($combined_battle)       ? 1 :
 			($combined_battle_water) ? 2 :
+			($combined_midnight)     ? 2 :
 			0;
 
 		if (
