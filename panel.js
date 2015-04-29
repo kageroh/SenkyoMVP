@@ -29,6 +29,7 @@
 	});
 
 	var $battle                = false;
+	var $battle_air            = false;
 	var $battle_midnight       = false;
 	var $battle_midnight_sp    = false;
 	var $practice              = false;
@@ -46,9 +47,9 @@
 		if (!/^http:\/\/.+?\/kcsapi\//.test(url)) return;
 
 		$battle                = /\/api_req_sortie\/battle$/.test(url);
+		$battle_air            = /\/api_req_sortie\/airbattle$/.test(url);
 		$battle_midnight       = /\/api_req_battle_midnight\/battle$/.test(url);
 		$battle_midnight_sp    = /\/api_req_battle_midnight\/sp_midnight$/.test(url);
-		$battle_air            = /\/api_req_sortie\/airbattle$/.test(url);
 		$practice              = /\/api_req_practice\/battle$/.test(url);
 		$practice_midnight     = /\/api_req_practice\/midnight_battle$/.test(url);
 		$combined_battle       = /\/api_req_combined_battle\/battle$/.test(url);
@@ -58,9 +59,9 @@
 		$combined_air          = /\/api_req_combined_battle\/airbattle$/.test(url);
 
 		if (!$battle &&
+			!$battle_air &&
 			!$battle_midnight &&
 			!$battle_midnight_sp &&
-			!$battle_air &&
 			!$practice &&
 			!$practice_midnight &&
 			!$combined_battle &&
