@@ -7,6 +7,7 @@ var SenkyoMVP = function (json, type, start_hps) {
 	var _n_ = 0;
 	var _a_ = 1;
 	var _w_ = 2;
+	var _m_ = 8;
 
 	var JINKEI = [
 		'',
@@ -279,6 +280,9 @@ var SenkyoMVP = function (json, type, start_hps) {
 		calcDamageHougeki(hougeki8,  damage_f2, ydamage_2);
 		calcDamageRaigeki(op_attack, damage_f2, ydamage_2);
 		calcDamageRaigeki(raigeki,   damage_f2, ydamage_2);
+		break;
+	case _m_:
+		calcDamageHougeki(hougeki8,  damage_f2, ydamage_2);
 		break;
 	}
 
